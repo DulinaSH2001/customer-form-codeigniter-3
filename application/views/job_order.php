@@ -11,17 +11,20 @@
     body {
         background-color: lightgrey;
         font-family: Arial, sans-serif;
+        font-size: 0.775rem;
     }
 
     .container {
         max-width: fit-content;
         margin-left: 20px;
         margin-right: 20px;
+        font-size: 0.775rem;
 
     }
 
     .form-control {
         border: 1px solid #ced4da;
+        font-size: 0.675rem;
 
     }
 

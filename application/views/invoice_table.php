@@ -11,6 +11,7 @@
     body {
         background-color: lightcyan;
         font-family: Arial, sans-serif;
+        font-size: 0.875rem;
     }
 
     .container {

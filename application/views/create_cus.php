@@ -55,6 +55,8 @@
                 <a href="<?php echo base_url(); ?>index.php/CustomerController/index"
                     class="btn btn-primary rounded">Back to list</a>
                 <button type="reset" class="btn btn-warning rounded" form="customerForm">Reset</button>
+                <a href="<?php echo base_url(); ?>index.php/CustomerController/excelupload"
+                    class="btn btn-primary rounded">Back to list</a>
             </div>
         </div>
         <div class="form-container">

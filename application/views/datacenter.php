@@ -5,11 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
     <title>Customer Center</title>
     <style>
+    thead {
+        background-color: #1a91c4;
+        color: white;
+    }
+
     .card {
         border: 1px solid #e0e0e0;
-
         background-color: whitesmoke;
     }
 
@@ -21,14 +27,11 @@
         width: 100%;
         text-decoration: none;
         color: black;
-
-
     }
 
-    .nav-link {
-        width: 100%;
-        text-decoration: none;
+    .nav-link:hover {
         color: black;
+        background-color: #aeaeae;
     }
 
     .custom-nav {
@@ -36,6 +39,11 @@
     }
 
     .active {
+        background-color: #1a91c4;
+        color: white !important;
+    }
+
+    .active:hover {
         background-color: #1a91c4;
         color: white !important;
     }
@@ -65,44 +73,34 @@
                     <nav>
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a href="#" class="nav-link py-2 px-4  text-black"
-                                    onclick="loadContent('job-order', this)">Job Order</a>
+                                <a href="#" class="nav-link py-2 px-4 text-black active">Job Order</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link py-2 px-4  text-black"
-                                    onclick="loadContent('estimate', this)">Estimate</a>
+                                <a href="#" class="nav-link py-2 px-4 text-black">Estimate</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link py-2 px-4  text-black"
-                                    onclick="loadContent('proforma-invoice', this)">Proforma Invoice</a>
+                                <a href="#" class="nav-link py-2 px-4 text-black">Proforma Invoice</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link py-2 px-4  text-black"
-                                    onclick="loadContent('invoice', this)">Invoice</a>
+                                <a href="#" class="nav-link py-2 px-4 text-black">Invoice</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link py-2 px-4  text-black"
-                                    onclick="loadContent('cash-invoice', this)">Cash Invoice</a>
+                                <a href="#" class="nav-link py-2 px-4 text-black">Cash Invoice</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link py-2 px-4  text-black"
-                                    onclick="loadContent('svat-invoice', this)">SVAT Invoice</a>
+                                <a href="#" class="nav-link py-2 px-4 text-black">SVAT Invoice</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link py-2 px-4  text-black"
-                                    onclick="loadContent('sales-return', this)">Sales Return</a>
+                                <a href="#" class="nav-link py-2 px-4 text-black">Sales Return</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link py-2 px-4  text-black"
-                                    onclick="loadContent('svat-return', this)">SVAT Return</a>
+                                <a href="#" class="nav-link py-2 px-4 text-black">SVAT Return</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link py-2 px-4  text-black"
-                                    onclick="loadContent('dispatch-note', this)">Dispatch Note</a>
+                                <a href="#" class="nav-link py-2 px-4 text-black">Dispatch Note</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link py-2 px-4  text-black"
-                                    onclick="loadContent('customer-pay', this)">Customer Pay</a>
+                                <a href="#" class="nav-link py-2 px-4 text-black">Customer Pay</a>
                             </li>
                         </ul>
                     </nav>
@@ -113,50 +111,52 @@
             <div class="col-md-8 col-lg-10 d-flex flex-column">
                 <div class="card p-4 flex-grow-1">
                     <div id="main-content">
-                        <div class="input-group text-right" style="max-width: 300px;">
-                            <input type="text" class="form-control" placeholder="Search" aria-label="Search">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">Search</button>
-                            </div>
-                        </div>
-
+                        <table id="data-table" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Column 1</th>
+                                    <th>Column 2</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Row 1 Data 1</td>
+                                    <td>Row 1 Data 2</td>
+                                </tr>
+                                <tr>
+                                    <td>Row 2 Data 1</td>
+                                    <td>Row 2 Data 2</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
-    <script>
-    function loadContent(section, element) {
-        const content = {
-            'job-order': '<h2>Job Order</h2><p>This is the Job Order section.</p>',
-            'estimate': '<h2>Estimate</h2><p>This is the Estimate section.</p>',
-            'proforma-invoice': '<h2>Proforma Invoice</h2><p>This is the Proforma Invoice section.</p>',
-            'invoice': '<h2>Invoice</h2><p>This is the Invoice section.</p>',
-            'cash-invoice': '<h2>Cash Invoice</h2><p>This is the Cash Invoice section.</p>',
-            'svat-invoice': '<h2>SVAT Invoice</h2><p>This is the SVAT Invoice section.</p>',
-            'sales-return': '<h2>Sales Return</h2><p>This is the Sales Return section.</p>',
-            'svat-return': '<h2>SVAT Return</h2><p>This is the SVAT Return section.</p>',
-            'dispatch-note': '<h2>Dispatch Note</h2><p>This is the Dispatch Note section.</p>',
-            'customer-pay': '<h2>Customer Pay</h2><p>This is the Customer Pay section.</p>'
-        };
-
-        // Update main content
-        document.getElementById('main-content').innerHTML = content[section] || '<p>Section not found.</p>';
-
-        // Remove active class from all nav links
-        const links = document.querySelectorAll('.nav-link');
-        links.forEach(link => link.classList.remove('active'));
-
-        // Add active class to the clicked nav link
-        element.classList.add('active');
-    }
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+
+        $('.nav-link').on('click', function() {
+            $('.nav-link').removeClass('active');
+            $(this).addClass('active');
+        });
+
+
+        $('#data-table').DataTable({
+            "responsive": true,
+            "autoWidth": false
+        });
+    });
+    </script>
+
 </body>
 
 </html>

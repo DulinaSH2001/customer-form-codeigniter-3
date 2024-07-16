@@ -159,6 +159,32 @@ Class Customerservice extends CI_Model{
     
         return $query->result();
     }
+    public function insert_excel($sheetData){
+
+        $data = [];
+        foreach ($sheetData as $key => $value) {
+            if ($key == 1) continue; // Skip the header row
+            $data[] = [
+                'cus_code' => $value['A'],
+                'customer' => $value['B'],
+                'main_email' => $value['C'],
+                'company_name' => $value['D'],
+                'cc_email' => $value['E'],
+                'main_phone' => $value['F'],
+                'website' => $value['G'],
+                'work_phone' => $value['H'],
+                'print_name' => $value['I'],
+                'mobile' => $value['J'],
+                'currency' => $value['K'],
+                'fax' => $value['L'],
+                'account' => $value['M'],
+                'date_of_joined' => $value['N'],
+            ];
+        }
+        
+        $this->db->insert_batch('customers', $data);
+    }
+
     
  
 }?>

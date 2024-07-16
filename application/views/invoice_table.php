@@ -7,6 +7,7 @@
     <title>Customer List</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <style>
     body {
         background-color: lightcyan;
@@ -83,11 +84,10 @@
                         <td><?php echo $invoice->total; ?></td>
 
                         <td>
-                            <a href="<?php echo base_url(); ?>index.php/ItemController/edit/<?php echo  $invoice->in_no; ?>"
-                                class="btn btn-warning btn-sm">print</a>
                             <a href="<?php echo base_url(); ?>index.php/InvoiceController/print_invoice/<?php echo  $invoice->in_no; ?>"
-                                class="btn btn-danger btn-sm"
-                                onclick="return confirm('Are you sure you want to delete this Item?');">print</a>
+                                class="btn btn-success btn-sm"> <i
+                                    class="mr-1 fa fa-file-pdf-o  text-primary-m1 text-120 w-2 m-1">
+                                </i> print</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>

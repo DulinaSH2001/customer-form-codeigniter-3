@@ -1,7 +1,7 @@
 <?php
 Class Itemservice extends CI_Model{
     function getallitem(){
-        $this->db->select('itemcode,itemname,itemrate,itemdescription');
+        $this->db->select('*');
         $this->db->from('items');
         $query = $this->db->get();
         return $query->result();
@@ -27,7 +27,9 @@ Class Itemservice extends CI_Model{
             'itemcode' => $item->getItemcode(),
             'itemname' => $item->getItemname(),
             'itemrate' => $item->getItemrate(),
-            'itemdescription' => $item->getItemdescription()
+            'itemdescription' => $item->getItemdescription(),
+            'itemcategory' => $item->getItemcategory()
+
         );
 
 
@@ -52,7 +54,8 @@ Class Itemservice extends CI_Model{
         $data = array(
             'itemname' => $item->getItemname(),
             'itemrate' => $item->getItemrate(),
-            'itemdescription' => $item->getItemdescription()
+            'itemdescription' => $item->getItemdescription(),
+            'itemcategory' => $item->getItemcategory()
         );
 
         $this->db->where('itemcode',$item->getItemcode());

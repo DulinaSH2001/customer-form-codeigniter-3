@@ -77,6 +77,9 @@ Class Jobservice extends CI_Model{
         $class = $jobitemmodel->getClass();
         $site = $jobitemmodel->getSite();
         $unit = $jobitemmodel->getUnit();
+        $category = $jobitemmodel->getCategory();
+        $name = $jobitemmodel->getName();
+
         $count = count($item_code);
         $itemData = array();
         for ($i = 0; $i < $count; $i++) {
@@ -94,7 +97,9 @@ Class Jobservice extends CI_Model{
                 'total' => $total[$i],
                 'class' => $class[$i],
                 'site' => $site[$i],
-                'unit' => $unit[$i]
+                'unit' => $unit[$i],
+                'category' => $category[$i],
+                'name' => $name[$i]
             );
             }
         }
@@ -166,6 +171,8 @@ Class Jobservice extends CI_Model{
         $class = $jobitemmodel->getClass();
         $site = $jobitemmodel->getSite();
         $unit = $jobitemmodel->getUnit();
+        $category = $jobitemmodel->getCategory();
+        $name = $jobitemmodel->getName();
         $count = count($item_code);
 
         $itemData = array();
@@ -184,7 +191,9 @@ Class Jobservice extends CI_Model{
                 'total' => $total[$i],
                 'class' => $class[$i],
                 'site' => $site[$i],
-                'unit' => $unit[$i]
+                'unit' => $unit[$i],
+                'category' => $category[$i],
+                'name' => $name[$i]
             );
             }
         }

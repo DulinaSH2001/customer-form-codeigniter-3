@@ -77,6 +77,7 @@ public function createjob() {
       $jobitemmodel->setJoborderCode($this->input->post('joNo'));
       $jobitemmodel->setItemCode($this->input->post('itemcode[]'));
       $jobitemmodel->setDescription($this->input->post('description[]'));
+      
       $jobitemmodel->setOnhand($this->input->post('onhand[]'));
       $jobitemmodel->setQty($this->input->post('qty[]'));
       $jobitemmodel->setRate($this->input->post('rate[]'));
@@ -87,6 +88,8 @@ public function createjob() {
       $jobitemmodel->setClass($this->input->post('class[]'));
       $jobitemmodel->setSite($this->input->post('site[]'));
       $jobitemmodel->setUnit($this->input->post('unit[]'));
+      $jobitemmodel->setCategory($this->input->post('category[]'));
+      $jobitemmodel->setName($this->input->post('name[]'));
 
       
       //print_r($jobitemmodel);

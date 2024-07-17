@@ -62,6 +62,16 @@ Class InvoiceController extends CI_Controller {
         }
         $this->load->view('invoice_print',$data);
       }
+      public function job_item_table(){
+        $joborderservice = new Jobservice();
+        $data['jobitems']=$joborderservice->getalljobitems();
+        $this->load->view('job_item_table',$data);  
+      }
+      public function monthly_sale(){
+        $invoice = new Invoiceservice();
+        $data['order_items'] = $invoice->getmonthly_sale();
+        $this->load->view('monthly_sale',$data);
+      }
      
       
      }

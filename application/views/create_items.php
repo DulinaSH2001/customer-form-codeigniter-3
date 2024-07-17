@@ -103,6 +103,18 @@
                                 <input type="number" class="form-control" name="itemPrice" placeholder="Item price">
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="Itemname">Item Category</label>
+                                <select class="form-control" name="itemCategory">
+                                    <option value="Category 1">Bakery</option>
+                                    <option value="Category 2">Beverages</option>
+                                    <option value="Category 3">Fruits</option>
+                                </select>
+                            </div>
+
+                        </div>
+
 
                     </form>
                 </div>

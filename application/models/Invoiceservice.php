@@ -42,6 +42,12 @@ Class Invoiceservice extends CI_Model {
         $query = $this->db->get();
         return $query->row()->jo_no;
     }
+    public function getmonthly_sale(){
+        $this->db->select('*');
+        $this->db->from('job_order_items');
+        $query = $this->db->get();
+        return $query->result(); 
+    }
     
 }
 ?>

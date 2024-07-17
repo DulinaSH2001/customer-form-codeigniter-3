@@ -58,7 +58,7 @@
                         class="btn btn-success rounded mr-1">Items</a>
                     <a href="<?php echo base_url(); ?>index.php/JobController/createjob"
                         class="btn btn-primary rounded ml-1">Create Job Order</a>
-                    <a href="<?php echo base_url(); ?>index.php/JobController/invoice"
+                    <a href="<?php echo base_url(); ?>index.php/InvoiceController/invoice"
                         class="btn btn-primary rounded ml-1">Invoice</a>
 
 

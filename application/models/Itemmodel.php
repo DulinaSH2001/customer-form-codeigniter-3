@@ -5,6 +5,7 @@ Class Itemmodel extends CI_Model{
     var $itemname;
     var $itemrate;
     var $itemdescription;
+    var $itemcategory;
 
     public function getItemcode()
     {
@@ -44,5 +45,14 @@ Class Itemmodel extends CI_Model{
     public function setItemdescription($itemdescription)
     {
         $this->itemdescription = $itemdescription;
+    }
+    public function getItemcategory()
+    {
+        return $this->itemcategory;
+    }
+
+    public function setItemcategory($itemcategory)
+    {
+        $this->itemcategory = $itemcategory;
     }
 }

@@ -28,6 +28,7 @@ Class ItemController extends CI_Controller{
         $itemmodel->setItemname($this->input->post('itemName'));
         $itemmodel->setItemdescription($this->input->post('description'));
         $itemmodel->setItemrate($this->input->post('itemPrice'));
+        $itemmodel->setItemcategory($this->input->post('itemCategory'));
 
         $itemservice->saveitem($itemmodel);
         $this->index();
@@ -50,6 +51,7 @@ Class ItemController extends CI_Controller{
         $itemmodel->setItemname($this->input->post('itemName'));
         $itemmodel->setItemdescription($this->input->post('description'));
         $itemmodel->setItemrate($this->input->post('itemPrice'));
+        $itemmodel->setItemcategory($this->input->post('itemCategory'));
 
         
 

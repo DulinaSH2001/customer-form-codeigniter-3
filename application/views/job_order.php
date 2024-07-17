@@ -244,6 +244,8 @@
                                         <?php foreach($items as $item): ?>
                                         <option value="<?php echo $item->itemcode; ?>"
                                             data-description="<?php echo $item->itemdescription; ?>"
+                                            data-name="<?php echo $item->itemname; ?>"
+                                            data-category="<?php echo $item->itemcategory?>"
                                             data-rate="<?php echo $item->itemrate; ?>">
                                             <?php echo $item->itemcode; ?>
                                         </option>
@@ -254,6 +256,9 @@
                                         placeholder="description"></textarea></td>
                                 <td><input type="text" class="form-control item-onhand" name="onhand[]"></td>
                                 <td><input type="number" class="form-control item-qty" name="qty[]" id=" item-qty-1">
+                                    <input type="hidden" class="form-control item-category" name="category[]"
+                                        id=" item-category">
+                                    <input type="hidden" class="form-control item-name" name="name[]" id=" item-name">
                                 </td>
                                 <td><input type="text" class="form-control item-rate" name="rate[]" readonly></td>
                                 <td><input type="text" class="form-control item-amount" id="item-amount-1"
@@ -292,7 +297,9 @@
                                         <?php foreach($items as $item): ?>
                                         <option value="<?php echo $item->itemcode; ?>"
                                             data-description="<?php echo $item->itemdescription; ?>"
-                                            data-rate="<?php echo $item->itemrate; ?>">
+                                            data-name="<?php echo $item->itemname; ?>"
+                                            data-rate="<?php echo $item->itemrate; ?>"
+                                            data-category="<?php echo $item->itemcategory?>">
                                             <?php echo $item->itemcode; ?>
                                         </option>
                                         <?php endforeach; ?>
@@ -303,7 +310,11 @@
                                 <td><input type="text" class="form-control item-onhand" name="onhand[]"></td>
                                 <td><input type="number" class="form-control item-qty" name="qty[]" id=" item-qty-1">
                                 </td>
-                                <td><input type="text" class="form-control item-rate" name="rate[]" readonly></td>
+                                <td><input type="text" class="form-control item-rate" name="rate[]" readonly>
+                                    <input type="hidden" class="form-control item-category" name="category[]"
+                                        id=" item-category">
+                                    <input type="hidden" class="form-control item-name" name="name[]" id=" item-name">
+                                </td>
                                 <td><input type="text" class="form-control item-amount" id="item-amount-1"
                                         name="amount[]" readonly>
                                 </td>
@@ -453,9 +464,14 @@
                 .selectedIndex];
             var description = selectedOption.getAttribute('data-description');
             var rate = selectedOption.getAttribute('data-rate');
+            var name = selectedOption.getAttribute('data-name');
+            var category = selectedOption.getAttribute('data-category');
+
 
             row.querySelector('.item-description').value = description;
             row.querySelector('.item-rate').value = rate;
+            row.querySelector('.item-name').value = name;
+            row.querySelector('.item-category').value = category;
 
             updateRowTotals(row);
         }
@@ -566,6 +582,7 @@
             newRow.querySelector('.item-disc').value = ''; // Clear discount
             newRow.querySelector('.item-discount').value = ''; // Clear discount amount
             newRow.querySelector('.item-total').value = ''; // Clear total
+
 
             document.getElementById('itemRows').appendChild(newRow);
         });

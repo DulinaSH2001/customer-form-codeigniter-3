@@ -127,15 +127,7 @@
                     <label for="to">To</label>
                     <input type="date" id="to" value="2024-10-20" class="form-control" />
                 </div>
-                <div class="form-group col-md">
-                    <label for="customer">Customer</label>
-                    <select id="customer" class="form-control">
-                        <option value="all">All</option>
-                        <?php foreach ($customers as $customer): ?>
-                        <option value="<?php echo $customer->customer; ?>"><?php echo $customer->customer?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
+
                 <div class="form-group col-md">
                     <label for="class">Class</label>
                     <select id="class" class="form-control">

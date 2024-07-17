@@ -104,6 +104,21 @@
                                     value="<?php echo $item->itemrate ?>" placeholder="Item price">
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="Itemname">Item Category</label>
+                                <select class="form-control" name="itemCategory">
+                                    <option value="Bakery"
+                                        <?php if ($item->itemcategory == 'Bakery') echo ' selected'; ?>>Bakery</option>
+                                    <option value="Beverages"
+                                        <?php if ($item->itemcategory == 'Beverages') echo ' selected'; ?>>Beverages
+                                    </option>
+                                    <option value="Fruits"
+                                        <?php if ($item->itemcategory == 'Fruits') echo ' selected'; ?>>Fruits</option>
+                                </select>
+                            </div>
+
+                        </div>
 
                     </form>
                 </div>

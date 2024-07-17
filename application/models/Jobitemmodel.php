@@ -14,6 +14,24 @@ Class Jobitemmodel extends CI_Model{
     var $class= array();
     var $site= array();
     var $unit= array();
+    var $name = array();
+    var $category = array();
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function getCategory() {
+        return $this->category;
+    }
+
+    public function setName($name) {
+        $this->name = $name;
+    }
+
+    public function setCategory($category) {
+        $this->category = $category;
+    }
 
     public function getJobitemCode() {
         return $this->jobitem_code;

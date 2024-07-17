@@ -159,32 +159,30 @@ Class Customerservice extends CI_Model{
     
         return $query->result();
     }
-    public function insert_excel($sheetData){
-
-        $data = [];
-        foreach ($sheetData as $key => $value) {
-            if ($key == 1) continue; // Skip the header row
-            $data[] = [
-                'cus_code' => $value['A'],
-                'customer' => $value['B'],
-                'main_email' => $value['C'],
-                'company_name' => $value['D'],
-                'cc_email' => $value['E'],
-                'main_phone' => $value['F'],
-                'website' => $value['G'],
-                'work_phone' => $value['H'],
-                'print_name' => $value['I'],
-                'mobile' => $value['J'],
-                'currency' => $value['K'],
-                'fax' => $value['L'],
-                'account' => $value['M'],
-                'date_of_joined' => $value['N'],
-            ];
-        }
-        
-        $this->db->insert_batch('customers', $data);
+    public function excel_save($customerModels) {
+        foreach ($customerModels as $customermodel) {
+            if (!empty($customermodel->getCusname())) {
+                $data = array(
+                    'cus_code' => $this->generate_customer_code(),
+                    'customer' => $customermodel->getCusname(),
+                    'company_name' => $customermodel->getCuscompany(),
+                    'main_phone' => $customermodel->getMainphone(),
+                    'work_phone' => $customermodel->getWorkphone(),
+                    'mobile' => $customermodel->getMoblenumber(),
+                    'fax' => $customermodel->getFaxnumber(),
+                    'main_email' => $customermodel->getEmail(),
+                    'cc_email' => $customermodel->getCcemail(),
+                    'website' => $customermodel->getWebsite(),
+                    'print_name' => $customermodel->getPrintName(),
+                    'currency' => $customermodel->getCrrency(),
+                    'account' => $customermodel->getAccounttype(),
+                    'date_of_joined' => $customermodel->getJoineddate()
+                );
+                $this->db->insert('customers', $data);
+            }
     }
-
+}
+}
     
  
-}?>
+?>

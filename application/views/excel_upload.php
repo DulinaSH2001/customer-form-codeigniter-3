@@ -19,8 +19,8 @@
 </head>
 
 <body>
-    <div class="min-vh-100 d-flex align-items-center justify-content-center">
-        <div class="card p-4 shadow-lg w-100" style="max-width: 600px">
+    <div class="container d-flex align-items-center justify-content-center">
+        <div class="card p-4  w-500">
             <div class="text-center mb-4">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg"
                     alt="Excel logo" class="rounded-circle border border-dark" style="height: 100px; width: 100px" />

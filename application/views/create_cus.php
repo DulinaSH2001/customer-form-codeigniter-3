@@ -55,10 +55,11 @@
                 <a href="<?php echo base_url(); ?>index.php/CustomerController/index"
                     class="btn btn-primary rounded">Back to list</a>
                 <button type="reset" class="btn btn-warning rounded" form="customerForm">Reset</button>
-                <a href="<?php echo base_url(); ?>index.php/CustomerController/excelupload"
-                    class="btn btn-primary rounded">Back to list</a>
+                <a href="<?php echo base_url(); ?>index.php/CustomerController/uploadexcel"
+                    class="btn btn-primary rounded">Import Excel</a>
             </div>
         </div>
+
         <div class="form-container">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">

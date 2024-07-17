@@ -117,6 +117,7 @@ Class CustomerController extends CI_Controller{
       $cusID =$id.'/'.$cus_code;
       $customerservice = new Customerservice();
       $customerservice->deletecustomer($cusID);
+      redirect('CustomerController/index');
       
       
    }
@@ -143,51 +144,39 @@ Class CustomerController extends CI_Controller{
               $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader($inputfiletype);
               $spreadsheet = $reader->load($inputFilename);
               $sheet = $spreadsheet->getSheet(0);
-
+  
+              $customerModels = array();
               foreach ($sheet->getRowIterator() as $row) {
                   $rowIndex = $row->getRowIndex();
-                  if ($rowIndex == 1) continue; // Skip the header row
-
-                  $cusname = $spreadsheet->getActiveSheet()->getCell('A' . $rowIndex)->getValue();
-                  $cuscompany = $spreadsheet->getActiveSheet()->getCell('B' . $rowIndex)->getValue();
-                  $mainphone = $spreadsheet->getActiveSheet()->getCell('C' . $rowIndex)->getValue();
-                  $workphone = $spreadsheet->getActiveSheet()->getCell('D' . $rowIndex)->getValue();
-                  $mobile = $spreadsheet->getActiveSheet()->getCell('E' . $rowIndex)->getValue();
-                  $fax = $spreadsheet->getActiveSheet()->getCell('F' . $rowIndex)->getValue();
-                  $mainEmail = $spreadsheet->getActiveSheet()->getCell('G' . $rowIndex)->getValue();
-                  $ccEmail = $spreadsheet->getActiveSheet()->getCell('H' . $rowIndex)->getValue();
-                  $website = $spreadsheet->getActiveSheet()->getCell('I' . $rowIndex)->getValue();
-                  $printName = $spreadsheet->getActiveSheet()->getCell('J' . $rowIndex)->getValue();
-                  $currency = $spreadsheet->getActiveSheet()->getCell('K' . $rowIndex)->getValue();
-                  $account = $spreadsheet->getActiveSheet()->getCell('L' . $rowIndex)->getValue();
-                  $dateOfJoined = $spreadsheet->getActiveSheet()->getCell('M' . $rowIndex)->getValue();
-
+                  if ($rowIndex == 1) continue;
+  
                   $customermodel = new Customermodel();
-                  $customerservice = new Customerservice();
-
-                  $customermodel->setCusname($cusname);
-                  $customermodel->setCuscompany($cuscompany);
-                  $customermodel->setMainphone($mainphone);
-                  $customermodel->setWorkphone($workphone);
-                  $customermodel->setMoblenumber($mobile);
-                  $customermodel->setFaxnumber($fax);
-                  $customermodel->setEmail($mainEmail);
-                  $customermodel->setCcemail($ccEmail);
-                  $customermodel->setWebsite($website);
-                  $customermodel->setPrintName($printName);
-                  $customermodel->setCrrency($currency);
-                  $customermodel->setAccounttype($account);
-                  $customermodel->setJoineddate($dateOfJoined);
-
-                  $customerservice->save($customermodel);
+                  $customermodel->setCusname($spreadsheet->getActiveSheet()->getCell('A' . $rowIndex)->getValue());
+                  $customermodel->setCuscompany($spreadsheet->getActiveSheet()->getCell('B' . $rowIndex)->getValue());
+                  $customermodel->setMainphone($spreadsheet->getActiveSheet()->getCell('C' . $rowIndex)->getValue());
+                  $customermodel->setWorkphone($spreadsheet->getActiveSheet()->getCell('D' . $rowIndex)->getValue());
+                  $customermodel->setMoblenumber($spreadsheet->getActiveSheet()->getCell('E' . $rowIndex)->getValue());
+                  $customermodel->setFaxnumber($spreadsheet->getActiveSheet()->getCell('F' . $rowIndex)->getValue());
+                  $customermodel->setEmail($spreadsheet->getActiveSheet()->getCell('G' . $rowIndex)->getValue());
+                  $customermodel->setCcemail($spreadsheet->getActiveSheet()->getCell('H' . $rowIndex)->getValue());
+                  $customermodel->setWebsite($spreadsheet->getActiveSheet()->getCell('I' . $rowIndex)->getValue());
+                  $customermodel->setPrintName($spreadsheet->getActiveSheet()->getCell('J' . $rowIndex)->getValue());
+                  $customermodel->setCrrency($spreadsheet->getActiveSheet()->getCell('K' . $rowIndex)->getValue());
+                  $customermodel->setAccounttype($spreadsheet->getActiveSheet()->getCell('L' . $rowIndex)->getValue());
+                  $customermodel->setJoineddate($spreadsheet->getActiveSheet()->getCell('M' . $rowIndex)->getValue());
+                 
+  
+                  $customerModels[] = $customermodel;
               }
-
+  
+              $customerservice = new Customerservice();
+              $customerservice->excel_save($customerModels);
               $this->index();
           } else {
-              echo 'error';
+              echo 'Error uploading file';
           }
       } else {
-          $this->load->view('welcome_message');
+          $this->index();
       }
   }
 
@@ -210,7 +199,7 @@ if ($this->upload->do_upload('upload_excel')) {
    $filedata = $this->upload->data();
    return $filedata['file_name'];
 } else {
-   echo $this->upload->display_errors();
+   //echo $this->upload->display_errors();
    return false;
 }
 }

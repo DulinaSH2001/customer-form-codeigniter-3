@@ -53,7 +53,7 @@
     }
 
     tr {
-        height: 45px;
+        height: 30px;
     }
 
     .sm-col {
@@ -108,7 +108,7 @@
                 <button class="btn btn-secondary" onclick="generatePDF()">Create PDF 1</button>
                 <button class="btn btn-outline-success" onclick="window.print()">Print </button>
                 <a href="<?php echo base_url() ?>index.php/InvoiceController/monthly_sale"
-                    class="btn btn-outline-warning">get monthly sales</a>
+                    class="btn btn-outline-warning">Get Monthly Sales</a>
             </div>
         </div>
         <div class="card p-2 rounded-lg shadow-lg">
@@ -157,105 +157,89 @@
                 <table class="table table-striped table-bordered" id="invoiceTable">
                     <thead>
                         <tr>
-                            <th class="smd-col">Number</th>
-                            <th class="smd-col">Date</th>
-                            <th class="smd-col">Name</th>
-                            <th class="smd-col">Site</th>
-                            <th class="md-col">Class</th>
-                            <th class="md-col">Item code</th>
-                            <th class="md-col">Item Description</th>
+                            <th class="md-col">Item category</th>
+                            <th class="md-col">Item name</th>
                             <th class="sm-col">Qty</th>
-                            <th class="smd-col">Unit Price</th>
-                            <th class="smd-col">Discount</th>
-                            <th class="md-col">Amount</th>
-                            <th class="sm-col">Action</th>
+                            <th class="smd-col">Amount</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <?php if (!empty($joborders)) : ?>
-                        <?php foreach ($joborders as $joborder) : ?>
-                        <?php 
-                                $customerName = "";
-                                foreach ($customers as $customer) {
-                                    if ($customer->cus_code == $joborder->cus_code) {
-                                         $customerName = $customer->customer;
-                                         break;
-                                        }
-                                }
-                            ?>
-                        <tr style="height:25px ;" data-jo-no="<?php echo $joborder->jo_no; ?>"
-                            data-customer="<?php echo $customerName; ?>" data-date="<?php echo $joborder->date; ?>"
-                            data-class="<?php echo $joborder->class; ?>" data-site="<?php echo $joborder->site; ?>"
-                            data-final="<?php echo $joborder->final_total?>">
-                            <td colspan="12">_</td>
-                        </tr>
-                        <?php foreach ($jobitems as $jobitem) : ?>
-                        <?php if ($jobitem->jo_no == $joborder->jo_no) : ?>
-                        <tr data-jo-no="<?php echo $joborder->jo_no; ?>" data-customer="<?php echo $customerName; ?>"
-                            data-date="<?php echo $joborder->date; ?>" data-class="<?php echo $joborder->class; ?>"
-                            data-site="<?php echo $joborder->site; ?>" data-final="<?php echo $joborder->final_total?>">
-                            <td><?php echo $joborder->jo_no; ?></td>
-                            <td><?php echo $joborder->date; ?></td>
-                            <td><?=$customerName;?></td>
-                            <td><?php echo $joborder->site; ?></td>
-                            <td><?php echo $joborder->class; ?></td>
-                            <td><?php echo $jobitem->item_code; ?></td>
-                            <td><?php echo $jobitem->description; ?></td>
-                            <td><?php echo number_format($jobitem->qty); ?></td>
-                            <td><?php echo number_format($jobitem->rate,2); ?></td>
-                            <td><?php echo  number_format($joborder->tdiscount,2); ?></td>
-                            <td><?php echo  number_format($joborder->total,2) ?></td>
-                            <td></td>
-                        </tr>
-                        <?php endif; ?>
-                        <?php endforeach; ?>
-                        <tr data-jo-no="<?php echo $joborder->jo_no; ?>" data-customer="<?php echo $customerName; ?>"
-                            data-date="<?php echo $joborder->date; ?>" data-class="<?php echo $joborder->class; ?>"
-                            data-site="<?php echo $joborder->site; ?>" data-final="<?php echo $joborder->final_total?>">
-                            <td colspan="5" class="text-left text-align-center font-weight-bold"></td>
-                            <td colspan="5" class="text-left text-align-center font-weight-bold">NBT: </td>
-                            <td class="font-weight-bold"> <?php echo  number_format($joborder->nbt,2); ?></td>
-                            <td></td>
-                        </tr>
-                        <tr data-jo-no="<?php echo $joborder->jo_no; ?>" data-customer="<?php echo $customerName; ?>"
-                            data-date="<?php echo $joborder->date; ?>" data-class="<?php echo $joborder->class; ?>"
-                            data-site="<?php echo $joborder->site; ?>" data-final="<?php echo $joborder->final_total?>">
-                            <td colspan="5" class="text-left text-align-center font-weight-bold"></td>
-                            <td colspan="5" class="text-left text-align-center font-weight-bold">VAT: </td>
-                            <td class="font-weight-bold"> <?php echo  number_format($joborder->vat,2) ?></td>
-                            <td></td>
-                        </tr>
-                        <tr data-jo-no="<?php echo $joborder->jo_no; ?>" data-customer="<?php echo $customerName; ?>"
-                            data-date="<?php echo $joborder->date; ?>" data-class="<?php echo $joborder->class; ?>"
-                            data-site="<?php echo $joborder->site; ?>" data-final="<?php echo $joborder->final_total?>">
-                            <td colspan="5" class="text-left text-align-center font-weight-bold"></td>
-                            <td colspan="5" class="text-left text-align-center font-weight-bold">Total: </td>
-                            <td class="font-weight-bold"> <?php echo  number_format($joborder->final_total,2) ?></td>
-                            <td>
-                                <a
-                                    href="<?php echo base_url() ?>index.php/InvoiceController/store_invoice/<?php echo $joborder->jo_no; ?>/<?php echo $customerName; ?>/<?php echo $joborder->final_total?>"><button
-                                        type="button" class="btn btn-secondary" onclick="generateReport(this)"><i
-                                            class="mr-1 fa fa-file-pdf-o  text-primary-m1 text-120 w-2">
-                                        </i></button></a>
-
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                        <?php else : ?>
-                        <tr>
-                            <td colspan="12" class="text-center">No job orders found.</td>
-                        </tr>
-                        <?php endif; ?>
+                    <tbody id="tableBody">
+                        <!-- Rows will be inserted here by JavaScript -->
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-
     <script>
+    const orderItems = <?php echo json_encode($order_items); ?>;
+    console.log("orderItems:", orderItems);
+
+    function combineItems(items) {
+        if (!Array.isArray(items)) {
+            console.error("Expected an array but got:", items);
+            return {};
+        }
+        const combinedItems = {};
+        items.forEach(item => {
+            if (!combinedItems[item.category]) {
+                combinedItems[item.category] = {};
+            }
+            if (!combinedItems[item.category][item.item_code]) {
+                combinedItems[item.category][item.item_code] = {
+                    ...item,
+                    qty: 0,
+                    total: 0
+                };
+            }
+            combinedItems[item.category][item.item_code].qty += parseFloat(item.qty);
+            combinedItems[item.category][item.item_code].total += parseFloat(item.total);
+        });
+        return combinedItems;
+    }
+
+    function displayTable(combinedItems) {
+        const tableBody = document.querySelector('#invoiceTable tbody');
+        tableBody.innerHTML = '';
+        let totalQty = 0;
+        let totalAmount = 0;
+
+        Object.keys(combinedItems).forEach(category => {
+            const categoryRow = document.createElement('tr');
+            categoryRow.innerHTML = `<td class="font-weight-bold">${category}</td><td colspan="3"></td>`;
+            tableBody.appendChild(categoryRow);
+
+            Object.values(combinedItems[category]).forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                        <td></td>
+                        <td>${item.name}</td>
+                        <td>${item.qty}</td>
+                        <td>${item.total.toFixed(2)}</td>
+                    `;
+                tableBody.appendChild(row);
+
+                totalQty += parseFloat(item.qty);
+                totalAmount += parseFloat(item.total);
+            });
+        });
+
+        const spacerow = document.createElement('tr');
+        spacerow.innerHTML = `
+            <td colspan="4" class="font-weight-bold"></td>
+            `;
+        tableBody.appendChild(spacerow);
+
+        const totalRow = document.createElement('tr');
+        totalRow.innerHTML = `
+            <td colspan="2" class="font-weight-bold">Total</td>
+            <td>${totalQty.toFixed(1)}</td>
+            <td>${totalAmount.toFixed(2)}</td>
+            `;
+        tableBody.appendChild(totalRow);
+    }
+
     function filterTable() {
-        const selectedCustomer = $('#customer').val();
         const fromDate = new Date($('#from').val());
         const toDate = new Date($('#to').val());
         const dateFilter = $('#dates').val();
@@ -266,18 +250,13 @@
         const now = new Date();
         const lastMonth = new Date(now.setMonth(now.getMonth() - 1));
 
-        $('tr[data-jo-no]').each(function() {
-            const customerName = $(this).data('customer');
-            const date = new Date($(this).data('date'));
-            const className = $(this).data('class');
-            const siteName = $(this).data('site');
-            const rowText = $(this).text().toLowerCase();
+        const filteredItems = orderItems.filter(item => {
+            const date = new Date(item.created_at);
+            const className = item.class;
+            const siteName = item.site;
+            const rowText = `${item.item_code} ${item.item_name}`.toLowerCase();
 
             let showRow = true;
-
-            if (selectedCustomer !== 'all' && customerName !== selectedCustomer) {
-                showRow = false;
-            }
 
             if (!isNaN(fromDate.getTime()) && date < fromDate) {
                 showRow = false;
@@ -303,18 +282,20 @@
                 showRow = false;
             }
 
-            if (showRow) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
+            return showRow;
         });
+
+        const combinedItems = combineItems(filteredItems);
+        displayTable(combinedItems);
     }
 
+    $('#dates, #from, #to, #class, #site, #search').change(filterTable);
 
-    $('#dates, #from, #to, #customer, #class, #site, #search').change(filterTable);
-
-
+    $(document).ready(() => {
+        const combinedItems = combineItems(orderItems);
+        console.log('combined data', combinedItems);
+        displayTable(combinedItems);
+    });
 
     function generatePDF() {
         const {
@@ -322,34 +303,33 @@
         } = window.jspdf;
         const doc = new jsPDF();
 
-        doc.setFontSize(14);
-        doc.text("QB Lanka (Pvt) Ltd ", doc.internal.pageSize.getWidth() / 2, 16, {
+        doc.setFontSize(16);
+        doc.text("RUHARA DISTRIBUTORS", doc.internal.pageSize.getWidth() / 2, 23, {
             align: "center"
         });
 
-        doc.setFontSize(12);
-        doc.text("Address:Main Street, Battaramulla,Kotte-Bope Rode,Sri jayawardhenepura Kotte", doc.internal.pageSize
+        doc.setFontSize(10);
+        doc.text("Address : NO 228/A SAMAGIPURA MAHAOYA AMPARA", doc.internal.pageSize
             .getWidth() / 2, 30, {
                 align: "center"
             });
         doc.setFontSize(10);
-        doc.text("Mobile:0710890067 | Emial: accounting@gmail.com", doc.internal.pageSize.getWidth() / 2, 35, {
-            align: "center"
-        });
-
-        doc.text("Fax", doc.internal.pageSize.getWidth() / 2, 40, {
-            align: "center"
-        });
-        doc.setFontSize(10);
-        doc.text("Filter: ", 20, 60);
-        doc.text("Class: " + $('#class').val(), 50, 60);
-        doc.text("Date: " + $('#from').val() + " - " + $('#to').val(), 80, 60);
-        doc.text("Customer: " + $('#customer').val(), 150, 60);
+        doc.text("Mobile : 077 4518513 | Email : ruharadistributors2@gmail.com", doc.internal.pageSize.getWidth() / 2,
+            35, {
+                align: "center"
+            });
 
         doc.setFontSize(12);
-        doc.text("Invoice Details", doc.internal.pageSize.getWidth() / 2, 75, {
+        doc.text("Sale by Item Summary", doc.internal.pageSize.getWidth() / 2, 40, {
             align: "center"
         });
+
+        doc.setFontSize(10);
+        doc.text("From: " + $('#from').val() + " To: " + $('#to').val() + " (Class: " + $('#class').val() +
+            " | Site: " + $('#site').val() + ")", doc.internal.pageSize.getWidth() / 2, 46, {
+                align: "center"
+            });
+
 
 
         const visibleRows = [];
@@ -362,106 +342,86 @@
                 visibleRows.push(rowData);
             }
         });
+        visibleRows.pop();
+
+        let totalQty = 0;
+        let totalAmount = 0;
+
+        visibleRows.forEach(row => {
+            const qty = parseFloat(row[2]);
+            const amount = parseFloat(row[3]);
+
+            if (!isNaN(qty)) {
+                totalQty += qty;
+            }
+
+            if (!isNaN(amount)) {
+                totalAmount += amount;
+            }
+        });
+        const spacerow = ["", "", "", ""];
+        visibleRows.push(spacerow);
+
+
+        const totalRow = ["", "Total", totalQty.toFixed(2), totalAmount.toFixed(2)];
+        visibleRows.push(totalRow);
+
+
+        visibleRows.push(spacerow);
+
+        const totalRow2 = ["", "Total", totalQty.toFixed(2), totalAmount.toFixed(2)];
+        visibleRows.push(totalRow2);
+
+        totalRow2[0] = {
+            content: totalRow2[0],
+            styles: {
+                fillColor: [0, 0, 0]
+            }
+        };
+        totalRow2[1] = {
+            content: totalRow2[1],
+            styles: {
+                fillColor: [0, 0, 0],
+                textColor: [255, 255, 255]
+            }
+        };
+        totalRow2[2] = {
+            content: totalRow2[2],
+            styles: {
+                fillColor: [0, 0, 0],
+                textColor: [255, 255, 255]
+            }
+        };
+        totalRow2[3] = {
+            content: totalRow2[3],
+            styles: {
+                fillColor: [0, 0, 0],
+                textColor: [255, 255, 255]
+            }
+        };
 
 
         doc.autoTable({
             head: [$('#invoiceTable thead tr').find('th').map(function() {
                 return $(this).text();
-            }).get().slice(0, -1)],
+            }).get()],
             body: visibleRows,
-            startY: 80,
+            startY: 60,
             theme: 'striped',
             headStyles: {
                 fillColor: [26, 145, 196],
-                fontSize: 8
+                fontSize: 9,
+                cellWidth: 'auto',
+                cellPadding: 2,
             },
             styles: {
                 cellPadding: 1,
-                fontSize: 8
+                fontSize: 8,
+                cellWidth: 'auto'
             }
         });
 
         doc.save("ERP_Invoice_Report.pdf");
-    }
-
-
-
-
-
-    function generateReport(button) {
-        const row = button.closest('tr');
-        const joNo = row.dataset.joNo;
-        const cus_name = row.dataset.customer;
-
-
-        const Data = {
-            customerName: row.dataset.customer,
-            joNo: row.dataset.joNo,
-            date: row.dataset.date,
-            class: row.dataset.class,
-            site: row.dataset.site,
-            total: row.dataset.final
-        };
-
-
-        const {
-            jsPDF
-        } = window.jspdf;
-        const doc = new jsPDF();
-        doc.setFontSize(14);
-        doc.text("QB Lanka (Pvt) Ltd ", doc.internal.pageSize.getWidth() / 2, 16, {
-            align: "center"
-        });
-
-        doc.setFontSize(12);
-        doc.text("Address:Main Street, Battaramulla,Kotte-Bope Rode,Sri jayawardhenepura Kotte", doc.internal
-            .pageSize.getWidth() / 2, 30, {
-                align: "center"
-            });
-        doc.setFontSize(10);
-        doc.text("Mobile:0710890067 | Emial: accounting@gmail.com", doc.internal.pageSize.getWidth() / 2, 35, {
-            align: "center"
-        });
-
-        doc.text("Fax", doc.internal.pageSize.getWidth() / 2, 40, {
-            align: "center"
-        });
-        doc.text("Sales by Customer Summary", doc.internal.pageSize.getWidth() / 2, 45, {
-            align: "center"
-        });
-
-
-        doc.setFontSize(12);
-        doc.text(`${cus_name} Details`, doc.internal.pageSize.getWidth() / 2, 60, {
-            align: "center"
-        });
-
-
-
-        doc.autoTable({
-            head: [
-                ['Customer', 'Date', 'Class', 'Site', 'final total',
-                    'Currency'
-                ]
-            ],
-            body: [
-                [Data.customerName, Data.date, Data.class,
-                    Data.site, Data.total, 'LKR'
-                ]
-            ],
-            startY: 70,
-            theme: 'grid',
-            headStyles: {
-                fillColor: [26, 145, 196],
-                fontSize: 8
-            },
-            styles: {
-                cellPadding: 1,
-                fontSize: 8
-            }
-        });
-
-        doc.save(`JO_Report_${joNo}.pdf`);
     }
     </script>
 </body>

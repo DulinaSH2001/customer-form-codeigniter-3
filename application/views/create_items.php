@@ -107,9 +107,9 @@
                             <div class="form-group col-md-6">
                                 <label for="Itemname">Item Category</label>
                                 <select class="form-control" name="itemCategory">
-                                    <option value="Category 1">Bakery</option>
-                                    <option value="Category 2">Beverages</option>
-                                    <option value="Category 3">Fruits</option>
+                                    <option value="Bakery">Bakery</option>
+                                    <option value="Beverages">Beverages</option>
+                                    <option value="Fruits">Fruits</option>
                                 </select>
                             </div>
 
